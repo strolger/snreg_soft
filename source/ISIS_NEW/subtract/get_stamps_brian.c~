@@ -1,0 +1,53 @@
+#include<stdio.h>
+#include<math.h>
+#include<malloc.h>
+#include<stdlib.h>
+
+#include "image.h"
+#include "types.h"
+#include "functions.h"
+
+void get_stamps_brian(DATA_TYPE *ref, DATA_TYPE *img, char *map, float *Xstamps, float *Ystamps)
+{
+  int       i,j,ix,jx,nb,nsx,nsy,area_size_x,area_size_y,px,py,imax,jmax,mesh2;
+  DATA_TYPE pixmax,pix, pixi;
+  
+  nb=0;
+  
+  
+  
+  nsx=nstamps_x;
+  nsy=nstamps_y;
+
+  area_size_x=ceil((double)(width-stamp_size-mesh_size)/(double)nsx);
+  area_size_y=ceil((double)(height-stamp_size-mesh_size)/(double)nsy);
+  
+
+
+  mesh2=stamp_size/2+mesh_size/2;
+  ++nsx; ++nsy;
+  
+  for(ix=0;ix<nsx*nsy;ix++)
+    {
+      px=Xstamps[ix];
+      py=Ystamps[ix];
+      if (px==0) break;
+      pix=ref[px+width*py];
+      pixi=img[px+width*py];
+/* 130700 (JT) added distinction between image and reference saturation */
+/* May need to replace SATREF and SATIMG for SATURATION */
+      if(pix<SATURATION && pix > max_stamp_thresh && 
+	 pixi < SATURATION && pixi > max_stamp_thresh) {
+	stamps[nb].x=px;
+	stamps[nb++].y=py;
+	printf("nb: %i %i %i\n", nb,px,py);
+      }
+    }
+  
+  stamp_number=nb;
+  printf("nb: %i\n", nb);
+  
+  return;
+}
+
+

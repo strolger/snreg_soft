@@ -1,0 +1,86 @@
+CC= cc 
+FC= f77
+### Linux:
+# For a PC (Linux e.g.) you need -DLOWENDIAN for the FITS routines, and I've
+# been burned a gazillion times by g77 assuming automatic Fortran variables!
+#CFLAGS= -DLOWENDIAN -DOSF_ALPHA
+#FFLAGS= -O -fno-automatic
+
+#DECS
+#CFLAGS= -DLOWENDIAN -DOSF_ALPHA
+#FFLAGS= -O 
+
+### Solaris:
+# CFLAGS= -fast -xO4 -fsimple=2 -xdepend -xtarget=ultra -xarch=v8plusa 
+CFLAGS= -fast
+CLIBS=  -lm
+FFLAGS= -O
+
+DEST  = ../../bin
+
+IMP=../imp
+
+ all:  finalmatch starmatch getxform rematch getfluxbk
+
+ rematch: rematch.o nrutil.o
+	$(CC) -o rematch rematch.o nrutil.o $(CLIBS) $(CFLAGS)
+	mv rematch $(DEST)
+
+ imageio: imageio.o ../jtutil/jtfits.o
+	$(CC) -o imageio imageio.o ../jtutil/jtfits.o $(CLIBS) $(CFLAGS)
+	mv imageio $(DEST)   	
+
+ finalmatch: finalmatch.o nrutil.o
+	$(CC) -o finalmatch finalmatch.o nrutil.o $(CLIBS) $(CFLAGS)
+	mv finalmatch $(DEST)
+
+ starmatch: starmatch.o nrutil.o indexx.o hunt.o
+	$(CC) -o starmatch starmatch.o nrutil.o indexx.o hunt.o $(CLIBS) $(CFLAGS)
+	mv starmatch $(DEST)
+
+ getxform: getxform.o
+	$(CC) -o getxform getxform.o $(CLIBS) $(CFLAGS)	
+	mv getxform $(DEST)
+
+getfluxbk: getfluxbk.o $(IMP)/rwfits.o median.o
+	$(CC) $(CFLAGS) getfluxbk.o $(IMP)/rwfits.o median.o $(CLIBS) -o getfluxbk
+	mv getfluxbk $(DEST)
+
+machoflux: machoflux.o $(IMP)/rwfits.o median.o
+	$(CC) $(CFLAGS) machoflux.o $(IMP)/rwfits.o median.o $(CLIBS) -o machoflux
+
+templatesubstars: templatesubstars.o $(IMP)/rwfits.o indexx.o nrutil.o
+	$(CC) $(CFLAGS) templatesubstars.o $(IMP)/rwfits.o indexx.o nrutil.o $(CLIBS) -o templatesubstars
+
+defringe: defringe.o $(IMP)/rwfits.o indexx.o nrutil.o 
+	$(CC) $(CFLAGS) defringe.o $(IMP)/rwfits.o indexx.o nrutil.o $(CLIBS) -o defringe
+
+defringe_many: defringe_many.o $(IMP)/rwfits.o indexx.o nrutil.o 
+	$(CC) $(CFLAGS) defringe_many.o $(IMP)/rwfits.o indexx.o nrutil.o $(CLIBS) -o defringe_many
+
+makemask: makemask.o $(IMP)/rwfits.o nrutil.o
+	$(CC) $(CFLAGS) makemask.o $(IMP)/rwfits.o nrutil.o $(CLIBS) -o makemask
+
+fiximage: fiximage.o $(IMP)/rwfits.o nrutil.o
+	$(CC) $(CFLAGS) fiximage.o $(IMP)/rwfits.o nrutil.o $(CLIBS) -o fiximage
+
+flatten: flatten.o $(IMP)/rwfits.o nrutil.o
+	$(CC) $(CFLAGS) flatten.o $(IMP)/rwfits.o nrutil.o $(CLIBS) -o flatten
+
+mksuperflat: mksuperflat.o $(IMP)/rwfits.o nrutil.o
+	$(CC) $(CFLAGS) mksuperflat.o $(IMP)/rwfits.o nrutil.o $(CLIBS) -o mksuperflat
+
+ finalmatch.o:
+	$(CC) $(CFLAGS)  -c finalmatch.c
+ starmatch.o: 
+	$(CC) $(CFLAGS)  -c starmatch.c
+ nrutil.o: 
+	$(CC) $(CFLAGS)  -c nrutil.c
+ hunt.o: 
+	$(CC) $(CFLAGS)  -c hunt.c
+ indexx.o: 
+	$(CC) $(CFLAGS)  -c indexx.c
+
+clean:
+	rm *.o
+

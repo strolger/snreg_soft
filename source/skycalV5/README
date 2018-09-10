@@ -1,0 +1,65 @@
+
+SKYCALC AND SKYCALENDER V5 - README
+
+This contains the V5 version of the observer's almanac tools,
+skycalc and skycalendar.  
+
+Skycalc is an interactive tool which conveniently handles the 
+time-and-the-sky calculations commonly encountered in optical 
+astronomy.  It has many features useful for planning observations 
+and at the telescope.
+  
+Skycalendar prints a table of sunrise, sunset, moonrise, 
+moonset, and so on, organized on a nightly (double-dated) basis 
+for any site.  
+
+This version (posted 2001 February) incorporates some minor
+upgrades, bug fixes, and enhancements over V4.  Most notably, 
+for skycalc: 
+
+- colon-separated times and coordinates are now permitted; 
+- the program can be set to read the system clock every time
+  output is called for;
+- certain small pieces of copyright-protected code have been excised
+  and replaced with original or public-domain versions;
+- one can now save non-menu site paramters in a file. 
+
+And for skycalendar:
+
+- more TeX output options are supported (e.g., one month per page
+  in landscape mode).
+
+The two subdirectories are as follows:
+
+src - contains the source codes for skycalc and skycalendar.
+
+doc - contains a manual in four forms - plain TeX, dvi, postscript,
+  and PDF. Sorry, no HTML manual yet.
+
+*** INSTALLATION ***
+
+If you're on an X86 Linux machine, it should suffice to simply
+copy the executables in the gzip compressed tar file skycal-linux.tgz
+to someplace in your path (e.g., somewhere
+like /usr/local/bin, or $HOME/bin).  You may want to rename the
+executables "skycalc" and "skycalendar".  It's conceivable
+that pre-Red-Hat-6 Linices might have some kind of problem -- 
+I haven't tested this.
+
+If you're on another UNIX machine, you should be able to compile 
+the source by typing
+
+cc skycalc.v5.c -o skycalc -lm 
+
+-- that's really all there is to it! -- and copying the output 
+("skycalc" in this example) into your path.  The code is one
+gigantic slab of C.  I know that the freebie pre-ANSI compilers
+on old SUN machines used to have troubles because the code uses some 
+distinctly ANSI features, but the free gcc compiler should handle it
+perfectly.
+
+If you have another OS (e.g., the Evil Empire OS) and compiler, 
+you're on your own -- I know that old Windows C compilers used to 
+choke on skycalc because it is a gigantic monolithic file with a 
+bunch of routines in it, but I can't imagine why the industry would 
+maintain these limits for modern machines. 

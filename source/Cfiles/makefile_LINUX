@@ -1,0 +1,38 @@
+CC    = cc                  # the C compiler
+COPTS = -g
+DEST  = ../
+LIBS  =  -lm 
+
+ all:  finalmatch starmatch getxform rematch
+
+
+ rematch: rematch.o nrutil.o
+	$(CC) -o rematch rematch.o nrutil.o $(LIBS) $(COPTS)
+	mv rematch $(DEST)
+
+ finalmatch: finalmatch.o nrutil.o
+	$(CC) -o finalmatch finalmatch.o nrutil.o $(LIBS) $(COPTS)
+	mv finalmatch $(DEST)
+
+ starmatch: starmatch.o nrutil.o indexx.o hunt.o
+	$(CC) -o starmatch starmatch.o nrutil.o indexx.o hunt.o $(LIBS) $(COPTS)
+	mv starmatch $(DEST)
+
+ getxform: getxform.o
+	$(CC) -o getxform getxform.o $(LIBS) $(COPTS)	
+	mv getxform $(DEST)
+
+ finalmatch.o:
+	$(CC) $(COPTS)  -c finalmatch.c
+ starmatch.o: 
+	$(CC) $(COPTS)  -c starmatch.c
+ nrutil.o: 
+	$(CC) $(COPTS)  -c nrutil.c
+ hunt.o: 
+	$(CC) $(COPTS)  -c hunt.c
+ indexx.o: 
+	$(CC) $(COPTS)  -c indexx.c
+
+clean:
+	rm *.o
+

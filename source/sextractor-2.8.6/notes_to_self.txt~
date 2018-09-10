@@ -1,0 +1,1 @@
+./configure --with-fftw=/sw/lib --with-fftw-incdir=/sw/include

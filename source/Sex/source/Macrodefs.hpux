@@ -1,0 +1,12 @@
+#
+# macro definitions for the HP/UX ANSI-C Compiler
+#
+# E.BERTIN 1997
+#
+SEXMACHINE= hpux
+CC    = gcc				# the C compiler
+#COPTS = -Aa +O3 -DHP_UX	$ANSI		# options for the C compiler
+COPTS = -O -DHP_UX
+CD    = cd
+CP    = cp
+RM    = rm -f

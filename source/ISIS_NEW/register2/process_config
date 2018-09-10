@@ -1,0 +1,13 @@
+IM_DIR        ../images2     Directory where the images are
+MRJ_DIR       ..            Installation directory
+REFERENCE     infile0.fits    Reference image for astrometry
+REF_SUB       ref.fits      Reference image for subtraction
+INFILE        ../register2/dates         Dates of the frames
+VARIABLES     phot.data     coordinates of objects for which we want to make light curves
+DEGREE          0           The degree of the polynomial astrometric transform between frames 
+CONFIG_DIR      ../register2          Where to find the configuration files
+SIG_THRESH      0.27
+COSMIC_THRESH   1000.0
+REF_STACK       infile0.fits
+N_REJECT        2
+MESH_SMOOTH     3

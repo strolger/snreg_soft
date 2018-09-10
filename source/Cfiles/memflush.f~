@@ -1,0 +1,11 @@
+CCC routine fills 2 GB of RAM, may be virtual
+CCC 2147483647= max length of 32-bit integer
+CCC ignore-- doesnt seem to matter if real/integer*8 or not
+CCC complie using gfortran -fno-range-check -m64 -o memflush memflush.f
+CCC 34359738367= max length of 64-bit integer
+      real*8 x(34359738367)
+      integer*8 i
+      do i=1,34359738367
+         x(i)=i*0.928372451
+      end do
+      end

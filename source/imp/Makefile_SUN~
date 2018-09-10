@@ -1,0 +1,37 @@
+CC= cc
+FC= f77
+CLIBS= -lm
+### Linux:
+# For a PC (Linux e.g.) you need -DLOWENDIAN for the FITS routines, and I've
+# been burned a gazillion times by g77 assuming automatic Fortran variables!
+#CFLAGS= -O -DLOWENDIAN
+#FFLAGS= -O -fno-automatic
+### Solaris:
+CFLAGS= -O
+FFLAGS= -O
+
+
+UTIL=$(HOME)/soft/util
+
+jtftest: jtftest.o jtfits.o
+	$(CC) $(CFLAGS) jtftest.o jtfits.o $(CLIBS) -o jtftest
+
+jtxform: jtxform.o jtcoordfit.o
+	$(FC) -o jtxform $(FFLAGS) jtxform.o jtcoordfit.o
+
+jtmap: jtmap.o rwfits.o
+	$(CC) -o jtmap $(CFLAGS) jtmap.o rwfits.o
+
+superflat: superflat.o rwfits.o flatutils.o sort.o
+	$(CC) $(CFLAGS) superflat.o flatutils.o rwfits.o sort.o \
+	$(CLIBS) -o superflat
+
+xform: xform.o
+	$(FC) $(FFLAGS) xform.o $(FLIBS) -o xform
+
+
+
+
+clean:
+	rm *.o
+

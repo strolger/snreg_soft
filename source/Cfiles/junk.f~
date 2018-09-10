@@ -1,0 +1,8 @@
+CCC     It appears there is a 26-bit limit 
+      real*8 x(6710886)
+      integer i
+      do i=1,6710886
+         x(i)=i*0.928372451
+         write (6,*) x(i)
+      end do
+      end

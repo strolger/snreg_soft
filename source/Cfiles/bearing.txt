@@ -1,0 +1,51 @@
+Now, if you don't even what to do cross-correlation (or can't,
+because you are working in F300W and you really have an
+image of cosmic rays, not stars) you can use the jitter file,
+and a new program called "bearing", which I am also moving
+into the xdither directory, though you must run it from outside
+of iraf for now.  To run the program you use the form
+ 
+bearing wf2 <file.list
+ 
+where wf2, could instead be pc1,wf3,wf4,nic1,nic2,nic3,or stis.
+Only wf2-4 and nic3 have been checked against data, however.
+file.list is created by running in iraf:
+ 
+hselect *jif.fits[1] $I,ra_avg,dec_avg,roll_avg > file.list
+ 
+The output will look something like:
+ 
+NGC01 166.410256 72.663876 321.909525 
+NGC02 166.410203 72.663870 321.907356 
+NGC03 166.411149 72.664146 322.090419 
+NGC04 166.411145 72.664145 322.090239 
+NGC05 166.409051 72.663599 321.725027 
+NGC06 166.409045 72.663599 321.724907 
+NGC07 166.413043 72.664692 322.456165 
+NGC08 166.413044 72.664693 322.456286 
+NGC09 166.411968 72.664431 322.279483 
+NGC10 166.411969 72.664431 322.279537 
+ 
+running bearing on this file produces:
+ 
+bearing nic3 < jifn.list
+# Setting origin using NGC01
+ NGC01 7 xsh=0.000000 ysh=0.000000 rot=0.000000 
+ NGC02 7 xsh=0.138248 ysh=0.264977 rot=-0.002169 
+ NGC03 7 xsh=-5.309591 ysh=-4.087475 rot=0.180894 
+ NGC04 7 xsh=-5.289544 ysh=-4.068604 rot=0.180714 
+ NGC05 7 xsh=5.626143 ysh=5.709251 rot=-0.184498 
+ NGC06 7 xsh=5.629877 ysh=5.740714 rot=-0.184618 
+ NGC07 7 xsh=-16.101519 ysh=-12.816077 rot=0.546640 
+ NGC08 7 xsh=-16.119695 ysh=-12.819213 rot=0.546761 
+ NGC09 7 xsh=-10.837432 ysh=-7.753858 rot=0.369958 
+ NGC10 7 xsh=-10.838049 ysh=-7.759089 rot=0.370012
+ 
+The shifts are pretty good.  On our NGC3516
+data we got nic3 and WF shifts to a fraction
+of a pixel.  The WF shifts appeared to be
+better than the nic chips by about a factor
+of two in absolute terms, but comparable in
+relative terms (~0.2 pixel r.m.s.).  
+ 
+
