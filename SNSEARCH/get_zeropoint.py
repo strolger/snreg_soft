@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 '''
-wcs.py [--options] image.fits
+get_zeropoint.py [--options] image.fits
 '''
 
 
@@ -27,7 +27,7 @@ amiss = 10
 maxstars = 900
 matchsets = 3
 order = 3
-usewcs = False
+usewcs = True
 
 software = os.path.dirname('/'.join(os.path.realpath(__file__).split('/')[:-1]))
 sys.path.append(software)
@@ -256,9 +256,14 @@ if __name__=='__main__':
     ## ax = subplot(111)
     ## ax.hist(diffs,bins=20)
     ## show()
-    sextract.runsex(image+'.fits',verbose=verbose,
-                    flagfile=flagimg, clobber=True,
-                    paramstring="-PARAMETERS_NAME ../deep_find.param -DETECT_THRESH 3.0 -PHOT_APERTURES 10.0 -MAG_ZEROPOINT %2.2f" %average(diffs))
+    if flagimg:
+        sextract.runsex(image+'.fits',verbose=verbose,
+                        flagfile=flagimg, clobber=True,
+                        paramstring="-PARAMETERS_NAME ../deep_find_flags.param -DETECT_THRESH 2. -PHOT_APERTURES 10.0 -MAG_ZEROPOINT %2.2f" %average(diffs))
+    else:
+        sextract.runsex(image+'.fits',verbose=verbose,
+                        flagfile=flagimg, clobber=True,
+                        paramstring="-PARAMETERS_NAME ../deep_find.param -DETECT_THRESH 1.5 -PHOT_APERTURES 10.0 -MAG_ZEROPOINT %2.2f" %average(diffs))
     f = open(image+'.sexcat')
     lines = f.readlines()
     f.close()
