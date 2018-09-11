@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
+
 import os
 import sys
 
@@ -14,9 +14,10 @@ def fix_goodman_header():
         ccd = CCDData.read(filename, unit="adu")
 
         path, name = os.path.split(filename)
-        filename = os.path.join(path, 'h' + name)
+        ## filename = os.path.join(path, 'h' + name)
+        ## ccd.write(filename, overwrite=True)
 
-        ccd.write(filename, overwrite=True)
+        ccd.write(name, overwrite=True)
 
 if __name__ == '__main__':
     fix_goodman_header()

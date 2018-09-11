@@ -67,10 +67,3 @@ if __name__=='__main__':
         print('renaming %s --> %s' %(outimg,image))
         os.rename(outimg, image)
     print("\n\n DONE !! \n\n")
-
-
-
-
-
-
-
