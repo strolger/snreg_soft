@@ -183,6 +183,8 @@ if __name__=='__main__':
         cmd.append('%f %f' %(midx,midy))
         print(' '.join(cmd))
         ra1,dec1,j1,j2,j3 = check_output(' '.join(cmd),shell=True).split()
+        ra1 = str(ra1,'utf-8')
+        dec1 = str(dec1, 'utf-8')
         print('%s %s' %(ra1,dec1))
         rar1, decr1 = radecstring2rad(ra1, dec1)
         dtheta,dphi = eq2st(rar2,decr2,rar1,decr1)
