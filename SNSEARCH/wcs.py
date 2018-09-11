@@ -30,6 +30,9 @@ cmd.append('%s' %image)
 cmd.append('--ra %s --dec %s --radius %f'%(ra,dec,radius))
 print(' '.join(cmd))
 subprocess.call(' '.join(cmd),shell=True)
+if os.path.isfile(image.split('.fits')[0]+'.new'):
+    print('renaming .new image')
+    os.rename(image.split('.fits')[0]+'.new', image)
 print("\n\n DONE !! \n\n")
 
 
