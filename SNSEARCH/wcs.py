@@ -23,8 +23,8 @@ cmd.append('%s' %image)
 cmd.append('RA DEC')
 print(' '.join(cmd))
 ra, dec = check_output(' '.join(cmd),shell=True).split()
-
-pdb.set_trace()
+ra = string(ra,'utf-8')
+dec = string(dec, 'utf-8')
 cmd = [ os.path.join( sourcedir, "astrometry/bin/solve-field")]
 cmd.append('%s' %image)
 cmd.append('--ra %s --dec %s --radius %f'%(ra,dec,radius))
