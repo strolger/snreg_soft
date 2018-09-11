@@ -49,7 +49,7 @@ if __name__=='__main__':
     if len(arg) < 1:
         print(__doc__)
         
-
+    image = arg[0]
     cmd = [ os.path.join( sourcebindir, "gethead")]
     cmd.append('%s' %image)
     cmd.append('RA DEC')
