@@ -172,6 +172,8 @@ if __name__=='__main__':
         cmd.append('%f %f' %(midx,midy))
         print(' '.join(cmd))
         ra,dec,j1,j2,j3 = check_output(' '.join(cmd),shell=True).split()
+        ra = str(ra,'utf-8')
+        dec = str(dec, 'utf-8')
         print('%s %s' %(ra,dec))
         rar2, decr2 = radecstring2rad(ra, dec)
         midx+=100 # offset by 100 pixels to get scale
