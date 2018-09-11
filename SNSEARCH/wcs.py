@@ -43,7 +43,7 @@ if __name__=='__main__':
             except ValueError : 
                 print("Error : must specify verbosity level as an integer 1-10.")
                 sys.exit(0)
-        elif o == "--scale" :
+        elif o == "--pixscale" :
             radius = float(a)
 
     if len(arg) < 1:
