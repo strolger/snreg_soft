@@ -295,10 +295,14 @@ if __name__=='__main__':
         f.close()
         w = open(template+'.fits.stars','w')
         for line in lines:
-            if not line.startswith('#') and int(line.split()[-2])==0:
-                w.write(line)
+            if line.startswith('#'): continue
+            if flagimg:
+                if int(line.split()[-2])==0:
+                    w.write(line)
+                else:
+                    continue
             else:
-                continue
+                w.write(line)
         w.close()
         
 
@@ -332,10 +336,14 @@ if __name__=='__main__':
             f.close()
             w = open(image+'.fits.stars','w')
             for line in lines:
-                if not line.startswith('#') and int(line.split()[-2])==0:
-                    w.write(line)
+                if line.startswith('#'): continue
+                if flagimg:
+                    if int(line.split()[-2])==0:
+                        w.write(line)
+                    else:
+                        continue
                 else:
-                    continue
+                    w.write(line)
             w.close()
 
         runmatch(template+'.fits.stars',image+'.fits.stars',image+'.match',order=order)
@@ -343,6 +351,3 @@ if __name__=='__main__':
         runtransform(template+'.fits',image+'.fits',image+'.shift.fits', matchlist=image+'.match',useiraf=useiraf,order=order,clobber=clobber)
 
     if verbose: print('Done.')
-        
-            
-            

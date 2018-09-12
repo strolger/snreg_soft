@@ -45,7 +45,6 @@ def s2d(ra,dec):
     if not isinstance(dec,str):
         print ("Expecting DEC in sexigesimal")
         raise
-    #pdb.set_trace()
     try:
         ra=list(map(float,ra.split(':')))
     except:
@@ -56,13 +55,10 @@ def s2d(ra,dec):
     except:
         print ("Could not convert DEC, not in the right format?")
         raise
-    #rd="%5.6f"%((ra[0]+ra[1]/60.+ra[2]/3600.)*360./24.)
     rd=(ra[0]+ra[1]/60.+ra[2]/3600.)*360./24.
     if dec[0] < 0:
-        #dd="%5.6f"%(dec[0]-dec[1]/60.-dec[2]/3600.)
         dd=dec[0]-dec[1]/60.-dec[2]/3600.
     else:
-        #dd="%5.6f"%(dec[0]+dec[1]/60.+dec[2]/3600.)
         dd=dec[0]+dec[1]/60.+dec[2]/3600.
     return(rd,dd)
 
@@ -82,6 +78,32 @@ def eq2st(plate_center_ra, plate_center_dec, object_ra, object_dec):
                cos(object_ra - plate_center_ra))*arcsec_per_radian/div
     return(xi_obj,eta_obj)
     
+
+
+def binmode(data,bins=None):
+    from scipy import stats
+    data=array(data)
+    mdx = where(~isnan(data))
+    data = data[mdx]
+    if bins != None:
+        m,mbins = histogram(data, bins=bins)
+    else:
+        step=1/100.
+        splits = arange(0,1+step,step)
+        bin_edges=stats.mstats.mquantiles(data,splits)
+        bins=sort(list(set(bin_edges)))
+        #warnings.simplefilter("error",RuntimeWarning)
+        if (max(bins[:-1])-min(bins[1:]))*step!=0.0:
+            rebins = arange(min(bins[1:]), max(bins[:-1]),
+                            (max(bins[:-1])-min(bins[1:]))*step)
+            m,mbins = histogram(data,bins=rebins)
+        else:
+            m=zeros(1); mbins=zeros(2)
+    
+    mdx = where(m == max(m))
+    mbin =0.5*(mbins[mdx[0][0]+1]+mbins[mdx[0][0]])
+    return (mbin,
+            array(zip(*vstack([m,mbins[:-1]])[::-1])))
 
 if __name__=='__main__':
     import getopt
@@ -142,10 +164,14 @@ if __name__=='__main__':
     f.close()
     w = open(image+'.fits.stars','w')
     for line in lines:
-        if not line.startswith('#'):
-            w.write(line)
+        if line.startswith('#'): continue
+        if flagimg:
+            if int(line.split()[-2])==0:
+                w.write(line)
+            else:
+                continue
         else:
-            continue
+            w.write(line)
     w.close()
 
     #Get header info
@@ -259,32 +285,42 @@ if __name__=='__main__':
         if item[7] <30.:
             diffs.append(item[7]-data1[idx][:,3])
     diffs = array (diffs)
-    print ('ave diffs = %2.1f\t stdev = %2.1f' %(average(diffs), std(diffs)))
+    print ('ave diffs = %2.1f\t mode = %2.1f\t stdev = %2.1f' %(average(diffs), binmode(diffs)[0], std(diffs)))
+
+    ax = subplot(111)
+    ax.hist(diffs)#,bins=20)
+    ax.axvline(average(diffs), color='red',
+               label = r'$\overline{delta}= %2.1f\,, Mo = %2.1f\,, \sigma = %2.1f$' %(average(diffs), binmode(diffs)[0], std(diffs)))
+    ax.set_title('Histogram of zeropoints')
+    ax.set_xlabel('Instrumental magnitude offset from USNO B1')
+    savefig(image+'_zmag.png')
+    
+    
     ## ax = subplot(111)
     ## ax.hist(diffs,bins=20)
     ## show()
-    if flagimg:
-        sextract.runsex(image+'.fits',verbose=verbose,
-                        flagfile=flagimg, clobber=True,
-                        paramstring="-PARAMETERS_NAME ../deep_find_flags.param -DETECT_THRESH 2. -PHOT_APERTURES 10.0 -MAG_ZEROPOINT %2.2f" %average(diffs))
-    else:
-        sextract.runsex(image+'.fits',verbose=verbose,
-                        flagfile=flagimg, clobber=True,
-                        paramstring="-PARAMETERS_NAME ../deep_find.param -DETECT_THRESH 1.5 -PHOT_APERTURES 10.0 -MAG_ZEROPOINT %2.2f" %average(diffs))
-    f = open(image+'.sexcat')
-    lines = f.readlines()
-    f.close()
-    w = open(image+'.fits.stars','w')
-    for line in lines:
-        if not line.startswith('#'):
-            w.write(line)
-        else:
-            continue
-    w.close()
-           
-        
-              
-        
+    ## if flagimg:
+    ##     sextract.runsex(image+'.fits',verbose=verbose,
+    ##                     flagfile=flagimg, clobber=True,
+    ##                     paramstring="-PARAMETERS_NAME ../deep_find_flags.param -DETECT_THRESH 2. -PHOT_APERTURES 10.0 -MAG_ZEROPOINT %2.2f" %average(diffs))
+    ## else:
+    ##     sextract.runsex(image+'.fits',verbose=verbose,
+    ##                     flagfile=flagimg, clobber=True,
+    ##                     paramstring="-PARAMETERS_NAME ../deep_find.param -DETECT_THRESH 1.5 -PHOT_APERTURES 10.0 -MAG_ZEROPOINT %2.2f" %average(diffs))
+    ## f = open(image+'.sexcat')
+    ## lines = f.readlines()
+    ## f.close()
+    ## w = open(image+'.fits.stars','w')
+    ## for line in lines:
+    ##     if line.startswith('#'): continue
+    ##     if flagimg:
+    ##         if int(line.split()[-2])==0:
+    ##             w.write(line)
+    ##         else:
+    ##             continue
+    ##     else:
+    ##         w.write(line)
+    ## w.close()
     
     
                         
