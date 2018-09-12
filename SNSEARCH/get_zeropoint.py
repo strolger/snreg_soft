@@ -290,9 +290,12 @@ if __name__=='__main__':
     ax = subplot(111)
     ax.hist(diffs)#,bins=20)
     ax.axvline(average(diffs), color='red',
-               label = r'$\overline{delta}= %2.1f\,, Mo = %2.1f\,, \sigma = %2.1f$' %(average(diffs), binmode(diffs)[0], std(diffs)))
+               label = r'$\overline{\delta}= %2.1f\,, \sigma = %2.1f$' %(average(diffs), std(diffs)))
+    ax.axvline(binmode(diffs)[0], color='red', linestyle='--',
+               label = r'$Mo= %2.1f' %(binmode(diffs)[0]))
     ax.set_title('Histogram of zeropoints')
     ax.set_xlabel('Instrumental magnitude offset from USNO B1')
+    ax.legend(loc=2,frameon=False)
     savefig(image+'_zmag.png')
     
     
