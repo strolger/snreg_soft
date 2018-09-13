@@ -13,7 +13,7 @@ import sextract, imregister
 
 
 verbose = 1
-clobber = False
+clobber = True
 thresh = 50
 miss = 3.0
 zpR = 0.0
@@ -155,24 +155,24 @@ if __name__=='__main__':
         pdb.set_trace()
         sys.exit(1)
     if verbose > 1: print('image:\t%s.fits' %image)
-    ## if not os.path.isfile(image+'.sexcat') or not os.path.isfile(image+'.fits.stars') or clobber:
-    sextract.runsex(image+'.fits',verbose=verbose,
-                    flagfile=flagimg, clobber=True,
-                    paramstring="-DETECT_THRESH %.2f -PHOT_APERTURES 10.0" %thresh)
-    f = open(image+'.sexcat')
-    lines = f.readlines()
-    f.close()
-    w = open(image+'.fits.stars','w')
-    for line in lines:
-        if line.startswith('#'): continue
-        if flagimg:
-            if int(line.split()[-2])==0:
-                w.write(line)
+    if not os.path.isfile(image+'.sexcat') or not os.path.isfile(image+'.fits.stars') or clobber:
+        sextract.runsex(image+'.fits',verbose=verbose,
+                        flagfile=flagimg, clobber=True,
+                        paramstring="-DETECT_THRESH %.2f -PHOT_APERTURES 10.0" %thresh)
+        f = open(image+'.sexcat')
+        lines = f.readlines()
+        f.close()
+        w = open(image+'.fits.stars','w')
+        for line in lines:
+            if line.startswith('#'): continue
+            if flagimg:
+                if int(line.split()[-2])==0:
+                    w.write(line)
+                else:
+                    continue
             else:
-                continue
-        else:
-            w.write(line)
-    w.close()
+                w.write(line)
+        w.close()
 
     #Get header info
     cmd = [ os.path.join( sourcebindir, "gethead -u")]
@@ -285,45 +285,18 @@ if __name__=='__main__':
         if item[7] <30.:
             diffs.append(item[7]-data1[idx][:,3])
     diffs = array (diffs)
-    print ('ave diffs = %2.1f\t mode = %2.1f\t stdev = %2.1f' %(average(diffs), binmode(diffs)[0], std(diffs)))
-
+    print ('ave diffs = %2.1f\t mode = %2.1f\t stdev = %2.1f' %(average(diffs), binmode(diffs,bins=10)[0], std(diffs)))
+    
     ax = subplot(111)
     ax.hist(diffs)#,bins=20)
     ax.axvline(average(diffs), color='red',
                label = r'$\overline{\delta}= %2.1f\,, \sigma = %2.1f$' %(average(diffs), std(diffs)))
-    ax.axvline(binmode(diffs)[0], color='red', linestyle='--',
-               label = r'$Mo= %2.1f' %(binmode(diffs)[0]))
+    ax.axvline(binmode(diffs,bins=10)[0], color='red', linestyle='--',
+               label = r'$Mo= %2.1f$' %(binmode(diffs,bins=10)[0]))
     ax.set_title('Histogram of zeropoints')
     ax.set_xlabel('Instrumental magnitude offset from USNO B1')
     ax.legend(loc=2,frameon=False)
     savefig(image+'_zmag.png')
-    
-    
-    ## ax = subplot(111)
-    ## ax.hist(diffs,bins=20)
-    ## show()
-    ## if flagimg:
-    ##     sextract.runsex(image+'.fits',verbose=verbose,
-    ##                     flagfile=flagimg, clobber=True,
-    ##                     paramstring="-PARAMETERS_NAME ../deep_find_flags.param -DETECT_THRESH 2. -PHOT_APERTURES 10.0 -MAG_ZEROPOINT %2.2f" %average(diffs))
-    ## else:
-    ##     sextract.runsex(image+'.fits',verbose=verbose,
-    ##                     flagfile=flagimg, clobber=True,
-    ##                     paramstring="-PARAMETERS_NAME ../deep_find.param -DETECT_THRESH 1.5 -PHOT_APERTURES 10.0 -MAG_ZEROPOINT %2.2f" %average(diffs))
-    ## f = open(image+'.sexcat')
-    ## lines = f.readlines()
-    ## f.close()
-    ## w = open(image+'.fits.stars','w')
-    ## for line in lines:
-    ##     if line.startswith('#'): continue
-    ##     if flagimg:
-    ##         if int(line.split()[-2])==0:
-    ##             w.write(line)
-    ##         else:
-    ##             continue
-    ##     else:
-    ##         w.write(line)
-    ## w.close()
     
     
                         
