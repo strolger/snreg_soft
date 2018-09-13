@@ -35,7 +35,7 @@ if __name__=='__main__':
     data = tmp.astype(int)
     if verbose: print('Writing mask image flagimg.fits...')
     out = fits.PrimaryHDU(data)
-    out.scale('int16',bzero=32768)
+    out.scale('int16')
     out.writeto('flagimg.fits')
     if verbose: print('Done.')
     
