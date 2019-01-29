@@ -4,6 +4,9 @@ This routine creates a mask image for a fits image that excludes
 vignetted regions
 requires astropy
 
+TODO: Need updates to make the good values more flexible,
+sometimes less than 25k
+
 '''
 
 
