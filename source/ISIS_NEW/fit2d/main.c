@@ -1,3 +1,5 @@
+#include<stdlib.h>
+#include<ctype.h>
 #include<math.h>
 #include<stdio.h>
 #include "fit.h"

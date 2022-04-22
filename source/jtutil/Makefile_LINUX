@@ -1,4 +1,4 @@
-FC= f77
+FC= gfortran
 CC= cc
 # for ultrix
 # FFLAGS= -O -static
@@ -11,7 +11,7 @@ CC= cc
 # For Linux
 FFLAGS= -O -fno-automatic
 FLIBS=
-CFLAGS= -O -DLOWENDIAN
+CFLAGS= -O -DLOWENDIAN -Wno-implicit-function-declaration
 
 all:
 	$(FC) -c $(FFLAGS) *.f ; $(CC) -c $(CFLAGS) *.c

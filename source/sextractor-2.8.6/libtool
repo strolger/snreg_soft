@@ -30,10 +30,10 @@
 # the same distribution terms that you use for the rest of that program.
 
 # A sed program that does not truncate output.
-SED="/sw/bin/sed"
+SED="/opt/sw/bin/sed"
 
 # Sed that helps us avoid accidentally triggering echo(1) options like -n.
-Xsed="/sw/bin/sed -e 1s/^X//"
+Xsed="/opt/sw/bin/sed -e 1s/^X//"
 
 # The HP-UX ksh and POSIX shell print the target directory to stdout
 # if CDPATH is set.
@@ -44,11 +44,7 @@ available_tags=" CXX F77"
 
 # ### BEGIN LIBTOOL CONFIG
 
-<<<<<<< HEAD
-# Libtool was configured on host baade.stsci.edu:
-=======
-# Libtool was configured on host anjali.stsci.edu:
->>>>>>> 8002724e1ef1b9eb06c833d34adba10936bc077b
+# Libtool was configured on host onokuni.local:
 
 # Shell to use when invoking shell scripts.
 SHELL="/bin/sh"
@@ -70,23 +66,13 @@ fast_install=needless
 
 # The host system.
 host_alias=
-<<<<<<< HEAD
-host=i386-apple-darwin13.4.0
-host_os=darwin13.4.0
+host=i386-apple-darwin19.6.0
+host_os=darwin19.6.0
 
 # The build system.
 build_alias=
-build=i386-apple-darwin13.4.0
-build_os=darwin13.4.0
-=======
-host=i386-apple-darwin14.4.0
-host_os=darwin14.4.0
-
-# The build system.
-build_alias=
-build=i386-apple-darwin14.4.0
-build_os=darwin14.4.0
->>>>>>> 8002724e1ef1b9eb06c833d34adba10936bc077b
+build=i386-apple-darwin19.6.0
+build_os=darwin19.6.0
 
 # An echo program that does not interpret backslashes.
 echo="/bin/echo"
@@ -108,7 +94,7 @@ CC="cc"
 with_gcc=yes
 
 # An ERE matcher.
-EGREP="/sw/bin/grep -E"
+EGREP="/opt/sw/bin/grep -E"
 
 # The linker used to build libraries.
 LD="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld"
@@ -117,7 +103,7 @@ LD="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolcha
 LN_S="ln -s"
 
 # A BSD-compatible nm program.
-NM="/usr/bin/nm"
+NM="/usr/bin/nm -B"
 
 # A symbol stripping program
 STRIP="strip"
@@ -336,11 +322,7 @@ variables_saved_for_relink="PATH DYLD_LIBRARY_PATH  GCC_EXEC_PREFIX COMPILER_PAT
 link_all_deplibs=yes
 
 # Compile-time system search path for libraries
-<<<<<<< HEAD
-sys_lib_search_path_spec="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/6.0 /usr/local/lib"
-=======
-sys_lib_search_path_spec="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/6.1.0 /usr/local/lib"
->>>>>>> 8002724e1ef1b9eb06c833d34adba10936bc077b
+sys_lib_search_path_spec="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/12.0.0 /usr/local/lib"
 
 # Run-time system search path for libraries
 sys_lib_dlsearch_path_spec="/usr/local/lib /lib /usr/lib"
@@ -7297,11 +7279,7 @@ disable_libs=static
 # End:
 # ### BEGIN LIBTOOL TAG CONFIG: CXX
 
-<<<<<<< HEAD
-# Libtool was configured on host baade.stsci.edu:
-=======
-# Libtool was configured on host anjali.stsci.edu:
->>>>>>> 8002724e1ef1b9eb06c833d34adba10936bc077b
+# Libtool was configured on host onokuni.local:
 
 # Shell to use when invoking shell scripts.
 SHELL="/bin/sh"
@@ -7323,23 +7301,13 @@ fast_install=needless
 
 # The host system.
 host_alias=
-<<<<<<< HEAD
-host=i386-apple-darwin13.4.0
-host_os=darwin13.4.0
+host=i386-apple-darwin19.6.0
+host_os=darwin19.6.0
 
 # The build system.
 build_alias=
-build=i386-apple-darwin13.4.0
-build_os=darwin13.4.0
-=======
-host=i386-apple-darwin14.4.0
-host_os=darwin14.4.0
-
-# The build system.
-build_alias=
-build=i386-apple-darwin14.4.0
-build_os=darwin14.4.0
->>>>>>> 8002724e1ef1b9eb06c833d34adba10936bc077b
+build=i386-apple-darwin19.6.0
+build_os=darwin19.6.0
 
 # An echo program that does not interpret backslashes.
 echo="/bin/echo"
@@ -7361,7 +7329,7 @@ CC="g++"
 with_gcc=yes
 
 # An ERE matcher.
-EGREP="/sw/bin/grep -E"
+EGREP="/opt/sw/bin/grep -E"
 
 # The linker used to build libraries.
 LD="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld"
@@ -7370,7 +7338,7 @@ LD="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolcha
 LN_S="ln -s"
 
 # A BSD-compatible nm program.
-NM="/usr/bin/nm"
+NM="/usr/bin/nm -B"
 
 # A symbol stripping program
 STRIP="strip"
@@ -7589,11 +7557,7 @@ variables_saved_for_relink="PATH DYLD_LIBRARY_PATH  GCC_EXEC_PREFIX COMPILER_PAT
 link_all_deplibs=yes
 
 # Compile-time system search path for libraries
-<<<<<<< HEAD
-sys_lib_search_path_spec="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/6.0 /usr/local/lib"
-=======
-sys_lib_search_path_spec="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/6.1.0 /usr/local/lib"
->>>>>>> 8002724e1ef1b9eb06c833d34adba10936bc077b
+sys_lib_search_path_spec="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/12.0.0 /usr/local/lib"
 
 # Run-time system search path for libraries
 sys_lib_dlsearch_path_spec="/usr/local/lib /lib /usr/lib"
@@ -7620,11 +7584,7 @@ include_expsyms=""
 
 # ### BEGIN LIBTOOL TAG CONFIG: F77
 
-<<<<<<< HEAD
-# Libtool was configured on host baade.stsci.edu:
-=======
-# Libtool was configured on host anjali.stsci.edu:
->>>>>>> 8002724e1ef1b9eb06c833d34adba10936bc077b
+# Libtool was configured on host onokuni.local:
 
 # Shell to use when invoking shell scripts.
 SHELL="/bin/sh"
@@ -7646,23 +7606,13 @@ fast_install=needless
 
 # The host system.
 host_alias=
-<<<<<<< HEAD
-host=i386-apple-darwin13.4.0
-host_os=darwin13.4.0
+host=i386-apple-darwin19.6.0
+host_os=darwin19.6.0
 
 # The build system.
 build_alias=
-build=i386-apple-darwin13.4.0
-build_os=darwin13.4.0
-=======
-host=i386-apple-darwin14.4.0
-host_os=darwin14.4.0
-
-# The build system.
-build_alias=
-build=i386-apple-darwin14.4.0
-build_os=darwin14.4.0
->>>>>>> 8002724e1ef1b9eb06c833d34adba10936bc077b
+build=i386-apple-darwin19.6.0
+build_os=darwin19.6.0
 
 # An echo program that does not interpret backslashes.
 echo="/bin/echo"
@@ -7678,17 +7628,13 @@ LTCC="cc"
 LTCFLAGS=" -O3 -g -funroll-loops -fomit-frame-pointer -Wall"
 
 # A language-specific compiler.
-<<<<<<< HEAD
-CC="/Users/strolger/Ureka/ssbdev/iraf//unix/hlib//f77.sh"
-=======
-CC="/Users/strolger/Ureka/iraf//unix/hlib//f77.sh"
->>>>>>> 8002724e1ef1b9eb06c833d34adba10936bc077b
+CC="gfortran"
 
 # Is the compiler the GNU C compiler?
-with_gcc=
+with_gcc=yes
 
 # An ERE matcher.
-EGREP="/sw/bin/grep -E"
+EGREP="/opt/sw/bin/grep -E"
 
 # The linker used to build libraries.
 LD="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld"
@@ -7697,7 +7643,7 @@ LD="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolcha
 LN_S="ln -s"
 
 # A BSD-compatible nm program.
-NM="/usr/bin/nm"
+NM="/usr/bin/nm -B"
 
 # A symbol stripping program
 STRIP="strip"
@@ -7744,7 +7690,7 @@ pic_mode=default
 max_cmd_len=196608
 
 # Does compiler simultaneously support -c and -o options?
-compiler_c_o="no"
+compiler_c_o="yes"
 
 # Must we lock files when doing compilation?
 need_locks="no"
@@ -7916,11 +7862,7 @@ variables_saved_for_relink="PATH DYLD_LIBRARY_PATH  GCC_EXEC_PREFIX COMPILER_PAT
 link_all_deplibs=yes
 
 # Compile-time system search path for libraries
-<<<<<<< HEAD
-sys_lib_search_path_spec="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/6.0 /usr/local/lib"
-=======
-sys_lib_search_path_spec="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/6.1.0 /usr/local/lib"
->>>>>>> 8002724e1ef1b9eb06c833d34adba10936bc077b
+sys_lib_search_path_spec="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/12.0.0 /usr/local/lib"
 
 # Run-time system search path for libraries
 sys_lib_dlsearch_path_spec="/usr/local/lib /lib /usr/lib"

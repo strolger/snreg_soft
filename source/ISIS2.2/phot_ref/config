@@ -1,0 +1,11 @@
+nstars    7
+rad       3.0
+sat       20000.0
+rmax      0.5
+rbg_in    10.0
+rbg_out   15.0
+first     1
+keep      5
+psf_width 11
+mesh      2
+

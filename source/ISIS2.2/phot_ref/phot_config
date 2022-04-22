@@ -1,0 +1,16 @@
+ sub_x       3
+ sub_y       3
+ rad1_bg     14.0
+ rad2_bg     20.0
+ nstars      10
+ mesh        2
+ saturation  20000.0
+ min         5.0
+ psf_width   23
+ radphot     3.0
+ nstar_max   15
+ rad_aper    5.0
+ nb_adu_el   4
+ rmax        0.5
+ first       1
+ keep        5

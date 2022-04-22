@@ -47,7 +47,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/sextractor
 
 %changelog
-* Wed Aug 05 2015 Emmanuel Bertin <bertin@iap.fr>
+* Thu Feb 25 2021 Emmanuel Bertin <bertin@iap.fr>
 - Automatic RPM rebuild
 * Tue May 13 2003 Emmanuel Bertin <bertin@iap.fr>
 - RPM build for V2.3

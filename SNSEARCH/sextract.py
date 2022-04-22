@@ -316,7 +316,8 @@ def wht2var( infile, outfile=None, platescale='default',
     sextractor weight map.
     following Casertano et al 2006.
     """
-    import astropy.io.fits as pyfits
+    #import astropy.io.fits as pyfits
+    from astropy.io import fits as pyfits
     from numpy import nan_to_num
 
     # size of the input pixels in arcsec
@@ -383,7 +384,8 @@ def runsex(imfile, catfile=None, weightfile=None, flagfile=None,
     import os
     import subprocess
     #import exceptions
-    import astropy.io.fits as pyfits
+    #import astropy.io.fits as pyfits
+    from astropy.io import fits as pyfits
     ## from tools import hstsnphot
 
     # locate the sextractor binary and the config file dir

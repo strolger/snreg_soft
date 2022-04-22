@@ -1,0 +1,95 @@
+#include<stdio.h>
+#include<math.h>
+#include<malloc.h>
+#include<stdlib.h>
+
+#include "types.h"
+
+FILE  *read_header(char *name, int *offset_header,double *bscale1,double *bzero1)
+{
+ FILE      *ficin;
+ int       test,nb,i;
+ char      *header,s2[256],*cp,*cp2;
+ 
+ 
+  if(!(ficin=fopen(name,"r"))) 
+     {printf("Cannot Find File: %s\n", name); exit(0);}
+
+   
+   
+   if(!(header=(char *)malloc(80)))
+   {printf("Not enough memory to load Header\n"); exit(0);} 
+
+
+   cp=(char *)malloc(16*sizeof(char));
+   cp2=(char *)malloc(16*sizeof(char));
+
+ printf("name: %s\n", name);
+
+
+
+ test=0; nb=1; 
+
+ while(!test)
+ {
+
+   fread(header,80,1,ficin);
+
+    for(i=0;i<1;i++)
+    {
+     if(!(strncmp(&header[i*80],"NAXIS1",6)))  
+     {
+      sscanf(&header[i*80+10],"%s",s2);    
+      width=atoi(s2);
+     }
+    
+
+     if(!(strncmp(&header[i*80],"NAXIS2",6)))  
+     {
+      sscanf(&header[i*80+10],"%s",s2);    
+      height=atoi(s2);
+     }
+
+
+     if(!(strncmp(&header[i*80],"BITPIX",6)))  
+     {
+      sscanf(&header[i*80+10],"%s",s2);    
+      bitpix=atoi(s2);
+     }
+
+    
+     if(!(strncmp(&header[i*80],"BSCALE",6)))  
+     {
+      sscanf(&header[i*80+10],"%s",s2);    
+      *bscale1=atof(s2);
+     }
+
+     if(!(strncmp(&header[i*80],"BZERO",5)))  
+     {
+      sscanf(&header[i*80+10],"%s",s2);    
+      *bzero1=atof(s2);
+     }
+
+
+     if(!(strncmp(&header[i*80],"END ",4)))  
+     {
+      test=1;
+     } 
+
+
+   if(!test) ++nb;
+  
+   }
+
+  }
+
+  *offset_header = nb*80;
+  nb=nb-((int)floor((double)(nb-1)/(double)36))*36;
+  nb=36-nb;
+  *offset_header += nb*80;
+   for(i=0;i<nb;i++)  fread(header,80,1,ficin);
+
+  printf("width: %i height: %i bitpix: %i offset_header: %i\n", width, height, bitpix, *offset_header);
+  
+ return ficin;
+}

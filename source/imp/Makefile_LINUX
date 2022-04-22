@@ -1,5 +1,5 @@
 CC= cc
-FC= f77
+FC= gfortran
 CLIBS= -lm
 ### Linux:
 # For a PC (Linux e.g.) you need -DLOWENDIAN for the FITS routines, and I've

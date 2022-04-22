@@ -2,13 +2,13 @@
 /* config.h.in.  Generated from configure.ac by autoheader.  */
 
 /* BLAS header filename. */
-#define ATLAS_BLAS_H "/sw/include/cblas.h"
+#define ATLAS_BLAS_H "/opt/sw/include/cblas.h"
 
 /* CLAPACK header filename. */
-#define ATLAS_LAPACK_H "/sw/include/clapack.h"
+#define ATLAS_LAPACK_H "/opt/sw/include/clapack.h"
 
 /* Archive creation date */
-#define DATE "2015-08-05"
+#define DATE "2021-02-25"
 
 /* FFTW header filename. */
 #define FFTW_H "$fftw_incdir/fftw3.h"

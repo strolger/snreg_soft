@@ -1,0 +1,1 @@
+./configure --with-atlas-libdir=/opt/sw/lib/ --with-atlas-incdir=/opt/sw/include/ --with-fftw-libdir=/opt/sw/lib/ --with-fftw-incdir=/opt/sw/include/
