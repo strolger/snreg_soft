@@ -21,7 +21,6 @@ def subtract(tmp, img):
         outimg = img.replace('.fits','_sub.fits')
         if os.path.isfile(outimg): os.remove(outimg)
         hdu1 = fits.open(tmp)
-        pdb.set_trace()
         try:
             dat1 = hdu1['SCI'].data
         except:

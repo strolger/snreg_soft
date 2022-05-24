@@ -280,7 +280,7 @@ if __name__=='__main__':
         
     # first arg is the template file
     template = arg[0]
-    if template.endswith('.fits'): template=template.strip('.fits')
+    if template.endswith('.fits'): template=template.replace('.fits','')
     if not os.path.isfile(template+'.fits'):
         print('there is an error \n filename %s does not exist\n' %template+'.fits')
         print(__doc__)
@@ -319,7 +319,7 @@ if __name__=='__main__':
         imglist.append(img)
 
     for image in imglist:
-        if image.endswith('.fits'): image=image.strip('.fits')
+        if image.endswith('.fits'): image=image.replace('.fits','')
         if not os.path.isfile(image+'.fits'):
             print('there is an error \n filename %s does not exist\n' %image+'.fits')
             print(__doc__)
