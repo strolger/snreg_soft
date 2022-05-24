@@ -15,11 +15,10 @@ import sextract
 verbose = 1
 clobber = False
 thresh = 10
-scale = 1.0
+scale = 0.0
 flagimg = None
 goodmatch = 5
 nstars = 50
-scale = 1.0
 tol = 0.005
 maxstars = 900
 matchsets = 3
@@ -281,7 +280,7 @@ if __name__=='__main__':
         
     # first arg is the template file
     template = arg[0]
-    if template.endswith('.fits'): template=template.rstrip('.fits')
+    if template.endswith('.fits'): template=template.strip('.fits')
     if not os.path.isfile(template+'.fits'):
         print('there is an error \n filename %s does not exist\n' %template+'.fits')
         print(__doc__)
@@ -310,7 +309,7 @@ if __name__=='__main__':
 
     imglist = []
     if img.startswith('@'):
-        filename = img.rstrip('@')
+        filename = img.strip('@')
         f = open(filename, 'r')
         lines = f.readlines()
         f.close()
@@ -320,7 +319,7 @@ if __name__=='__main__':
         imglist.append(img)
 
     for image in imglist:
-        if image.endswith('.fits'): image=image.rstrip('.fits')
+        if image.endswith('.fits'): image=image.strip('.fits')
         if not os.path.isfile(image+'.fits'):
             print('there is an error \n filename %s does not exist\n' %image+'.fits')
             print(__doc__)
@@ -346,7 +345,7 @@ if __name__=='__main__':
                     w.write(line)
             w.close()
 
-        runmatch(template+'.fits.stars',image+'.fits.stars',image+'.match',order=order)
+        runmatch(template+'.fits.stars',image+'.fits.stars',image+'.match',order=order, scale=scale)
         if os.path.isfile('tmp.map'): os.rename('tmp.map','%s.map'%image)
         runtransform(template+'.fits',image+'.fits',image+'.shift.fits', matchlist=image+'.match',useiraf=useiraf,order=order,clobber=clobber)
 
