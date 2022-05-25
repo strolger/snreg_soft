@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 # 2022
 # L. Strolger
-# Something simple to copy out the science extension
+# Something simple to subtract images
 """
-get_sci_img.py img.fits [or @img.list]
+imsub.py template.fits image.fits
 """
 
 
