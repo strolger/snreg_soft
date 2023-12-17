@@ -36,7 +36,7 @@ if __name__ == '__main__':
 
     imglist = []
     if img.startswith('@'):
-        filename = img.rstrip('@')
+        filename = img.strip('@')
         f = open(filename, 'r')
         lines = f.readlines()
         f.close()
