@@ -1,0 +1,40 @@
+#!/usr/bin/env python
+# 2023
+# L. Strolger
+# Something simple to gaussian blur HST images
+"""
+img_gaussian_blur.py img.fits [or @img.list]
+"""
+
+import os,sys,pdb,scipy,glob
+from pylab import *
+from astropy.io import fits
+
+
+def gaussian_blur(fitsimg):
+    if not os.path.isfile(fitsimg):
+        print ("%s doesn't exist... moving on..." %fitsimg)
+        return()
+
+    hdul = fits.open(fitsimg)
+    data = hdul.data
+    pdb.set_trace()
+    
+
+if __name__=='__main__':
+    
+    img = sys.argv[1]
+
+    imglist = []
+    if img.startswith('@'):
+        filename = img.strip('@')
+        f = open(filename, 'r')
+        lines = f.readlines()
+        f.close()
+        for line in lines:
+            imglist.append(line.rstrip())
+    else:
+        imglist.append(img)
+
+    for image in imglist:
+        copy_out_sci(image)
