@@ -10,6 +10,7 @@ get_sci_img.py img.fits [or @img.list]
 import os,sys,pdb,scipy,glob
 from pylab import *
 from astropy.io import fits
+from astropy import wcs
 
 
 def copy_out_sci(fitsimg):
@@ -22,7 +23,9 @@ def copy_out_sci(fitsimg):
 
     hdul = fits.open(fitsimg)
     data = hdul['SCI'].data
-    hdu2 = fits.PrimaryHDU(data)
+    wcs1 = wcs.WCS(hdul['SCI'].header)
+    
+    hdu2 = fits.PrimaryHDU(data, header=wcs1.to_header())
     hduw = fits.HDUList([hdu2])
     hduw.writeto(outimg)
     print('%s written' %outimg)
